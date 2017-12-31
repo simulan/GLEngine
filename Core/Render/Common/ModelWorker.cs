@@ -1,4 +1,5 @@
 ﻿using OpenTK;
+using OpenTK.Graphics.OpenGL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -81,7 +82,23 @@ namespace UMLProgram.Core.Render.Common {
             result.Vertices = data.Vertices;
             result.UVs = data.UVs;
             result.Normals = data.Normals;
+
+            OrtagonalizeTangents(result);
             return result;
+        }
+        private static void OrtagonalizeTangents(D3Model2 model) {
+            for (int i = 0; i < model.Vertices.Length; i++) {
+                Vector3 n = model.Normals[i];
+                Vector3 t = model.Tangents[i];
+                Vector3 b = model.Bitangents[i];
+                //Gram-Schmidt orthogonalize
+                t = Vector3.Normalize(t - n * Vector3.Dot(n, t));
+                if (Vector3.Dot(Vector3.Cross(t,n), b) < 0.0f) {
+                    t = t * -1.0f;
+                }
+                model.Tangents[i] = t;
+            }
+
         }
         private static int GetIndex(List<Vector3> vertices, List<Vector2> uvs, List<Vector3> normals, Vector3 vertex, Vector2 uv, Vector3 normal) {
             int result = -1;

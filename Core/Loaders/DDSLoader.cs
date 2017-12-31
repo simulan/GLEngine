@@ -26,6 +26,8 @@ namespace UMLProgram.Core.Loaders {
             int textureHandle = -1;
             GL.GenTextures(1, out textureHandle);
             GL.BindTexture(TextureTarget.Texture2D, textureHandle);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMagFilter.Linear);
             LoadMipMaps(dds);
             return textureHandle;
         }

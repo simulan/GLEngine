@@ -3,5 +3,4 @@ C:\Work\My CSharp\UMLProgram\obj\Debug\UMLProgram.exe
 C:\Work\My CSharp\UMLProgram\obj\Debug\UMLProgram.pdb
 C:\Work\My CSharp\UMLProgram\bin\Debug\UMLProgram.exe
 C:\Work\My CSharp\UMLProgram\bin\Debug\UMLProgram.pdb
-C:\Work\My CSharp\UMLProgram\bin\Debug\OpenTK.xml
 C:\Work\My CSharp\UMLProgram\obj\Debug\GLProgram.csprojResolveAssemblyReference.cache

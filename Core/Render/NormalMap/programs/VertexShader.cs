@@ -18,7 +18,7 @@ namespace UMLProgram.Core.Render.NormalMap.programs {
             uniform mat4 view_matrix;
             uniform mat4 model_matrix;
             uniform vec3 light_color;
-            uniform int light_power;
+            uniform float light_power;
             uniform vec3 light_position_worldspace;
             
             out vec2 UV;

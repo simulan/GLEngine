@@ -16,10 +16,10 @@ namespace UMLProgram.Core.Render.NormalMap {
     public class NormalMapRenderer {
         private static ModelBuffer2 modelBuffer = new ModelBuffer2();
         private static Matrix4 projectionMatrix, viewMatrix, modelMatrix;
-        private static Vector3 lightColorUniform = new Vector3(0.8f, 0.8f, 0.8f);
-        private static Vector3 lightPositionUniform = new Vector3(5, 5, 0);
+        private static Vector3 lightColorUniform = new Vector3(1.0f, 1.0f, 1.0f);
+        private static Vector3 lightPositionUniform = new Vector3(5, 0, 0);
         private static int modelKey;
-        private static int lightPowerUniform = 6;
+        private static float lightPowerUniform = 60.0f;
         private static int textureHandle,
             normalMapHandle,
             vertexArrayHandle,

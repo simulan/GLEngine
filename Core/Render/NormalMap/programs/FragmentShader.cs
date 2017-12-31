@@ -9,7 +9,7 @@ namespace UMLProgram.Core.Render.NormalMap.programs {
         public static readonly string Text = @"
             #version 400 core
             uniform vec3 light_color;
-            uniform int light_power;
+            uniform float light_power;
             uniform sampler2D myTextureSampler;
             uniform sampler2D myNormalMap;
             uniform vec3 light_position_worldspace;
@@ -26,14 +26,16 @@ namespace UMLProgram.Core.Render.NormalMap.programs {
                 vec3 E = normalize( EyeDirection_tangentspace );
                 vec3 R = reflect(-l,n);
 
-                float distance = distance(Position_worldspace,light_position_worldspace);           
-                float cosTheta = clamp( dot( E,R ), 0,1 );
+                float distance = distance(light_position_worldspace , Position_worldspace);           
+                float cosTheta = clamp( dot( n,l ), 0,1 );
+                float cosAlpha = clamp( dot( E,R ), 0,1 );
+
                 vec3 materialColor = texture( myTextureSampler, UV ).rgb;
-                vec3 diffuseColor = materialColor * light_color * light_power * cosTheta / distance * distance;
+                vec3 diffuseColor = materialColor * light_color * light_power * cosTheta / (distance * distance);
                 vec3 ambientColor = materialColor * vec3(0.1, 0.1, 0.1);
-                vec3 specularColor = materialColor * light_color * light_power * pow(cosTheta,2) / (distance * distance);
+                vec3 specularColor = vec3(0.3,0.3,0.3) * light_color * light_power * pow(cosAlpha,5) / (distance * distance);
                 color = diffuseColor+ambientColor+specularColor;
             }
         ";
-    }
+    }//+ambientColor+specularColor
 }
