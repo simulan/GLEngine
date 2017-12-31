@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4F84EA6A-D8B8-4317-810E-3A963E0FC459}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UMLProgram</RootNamespace>
+    <AssemblyName>UMLProgram</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="OpenTK, Version=2.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenTK.2.0.0\lib\net20\OpenTK.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Core\Input\Controller.cs" />
+    <Compile Include="Core\Loaders\BlenderLoader.cs" />
+    <Compile Include="Core\Loaders\BMPLoader.cs" />
+    <Compile Include="Core\Loaders\Files\BMP.cs" />
+    <Compile Include="Core\Loaders\Files\D3Model2.cs" />
+    <Compile Include="Core\Loaders\Files\IndexedD3Model.cs" />
+    <Compile Include="Core\Loaders\Files\D3Model.cs" />
+    <Compile Include="Core\Loaders\Files\DDS.cs" />
+    <Compile Include="Core\Loaders\DDSLoader.cs" />
+    <Compile Include="Core\Loaders\Files\IndexedD3Model2.cs" />
+    <Compile Include="Core\Loaders\Files\TriIndexedD3Model.cs" />
+    <Compile Include="Core\Render\ColorCube\ColorCubeRenderer.cs" />
+    <Compile Include="Core\Render\ColorCube\CubeVertexData.cs" />
+    <Compile Include="Core\Render\ColorCube\Programs\FragmentShader.cs" />
+    <Compile Include="Core\Render\ColorCube\Programs\VertexShader.cs" />
+    <Compile Include="Core\Render\Common\ModelBuffer.cs" />
+    <Compile Include="Core\Render\Common\ModelBuffer2.cs" />
+    <Compile Include="Core\Render\Common\ModelWorker.cs" />
+    <Compile Include="Core\Render\Common\ShaderProgram.cs" />
+    <Compile Include="Core\Render\Cube\CubeRenderer.cs" />
+    <Compile Include="Core\Render\Cube\CubeVertexData.cs" />
+    <Compile Include="Core\Render\FragmentShader.cs" />
+    <Compile Include="Core\Render\Cube\Programs\VertexShader.cs" />
+    <Compile Include="Core\Render\NormalMap\NormalMapRenderer.cs" />
+    <Compile Include="Core\Render\NormalMap\programs\FragmentShader.cs" />
+    <Compile Include="Core\Render\NormalMap\programs\VertexShader.cs" />
+    <Compile Include="Core\Render\Rectangle\Programs\FragmentShader.cs" />
+    <Compile Include="Core\Render\Rectangle\Programs\VertexShader.cs" />
+    <Compile Include="Core\Render\Rectangle\RectangleRenderer.cs" />
+    <Compile Include="Core\Render\Rectangle\RectangleVertexData.cs" />
+    <Compile Include="Core\Render\Renderer.cs" />
+    <Compile Include="Core\Render\SimpleObject\Programs\FragmentShader.cs" />
+    <Compile Include="Core\Render\SimpleObject\Programs\VertexShader.cs" />
+    <Compile Include="Core\Render\SimpleObject\SimpleObjectRenderer.cs" />
+    <Compile Include="Core\Render\TexturedCube\Programs\FragmentShader.cs" />
+    <Compile Include="Core\Render\TexturedCube\Programs\VertexShader.cs" />
+    <Compile Include="Core\Render\TexturedCube\CubeData.cs" />
+    <Compile Include="Core\Render\TexturedCube\TexturedCubeRenderer.cs" />
+    <Compile Include="Core\Render\Text\Programs\FragmentShader.cs" />
+    <Compile Include="Core\Render\Text\Programs\VertexShader.cs" />
+    <Compile Include="Core\Render\Text\Text2D.cs" />
+    <Compile Include="Core\Render\Text\Text2DRenderer.cs" />
+    <Compile Include="Core\Render\Triangle\Programs\FragmentShader.cs" />
+    <Compile Include="Core\Render\Triangle\Programs\VertexShader.cs" />
+    <Compile Include="Core\Render\Triangle\TriangleRenderer.cs" />
+    <Compile Include="Core\Render\Triangle\TriangleVertexData.cs" />
+    <Compile Include="Core\UmlWindow.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="OpenTK.dll.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

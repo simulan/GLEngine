@@ -1,0 +1,11 @@
+C:\Work\My CSharp\UMLcreator\UMLProgram\bin\Debug\UMLProgram.exe.config
+C:\Work\My CSharp\UMLcreator\UMLProgram\bin\Debug\UMLProgram.exe
+C:\Work\My CSharp\UMLcreator\UMLProgram\bin\Debug\UMLProgram.pdb
+C:\Work\My CSharp\UMLcreator\UMLProgram\bin\Debug\OpenTK.dll
+C:\Work\My CSharp\UMLcreator\UMLProgram\bin\Debug\OpenTK.xml
+C:\Work\My CSharp\UMLcreator\UMLProgram\obj\Debug\UMLProgram.csprojResolveAssemblyReference.cache
+C:\Work\My CSharp\UMLcreator\UMLProgram\obj\Debug\UMLProgram.exe
+C:\Work\My CSharp\UMLcreator\UMLProgram\obj\Debug\UMLProgram.pdb
+C:\Work\My CSharp\UMLProgram\bin\Debug\UMLProgram.exe.config
+C:\Work\My CSharp\UMLProgram\obj\Debug\UMLProgram.exe
+C:\Work\My CSharp\UMLProgram\obj\Debug\UMLProgram.pdb

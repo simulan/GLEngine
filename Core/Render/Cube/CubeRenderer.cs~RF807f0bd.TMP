@@ -1,0 +1,68 @@
+﻿using OpenTK;
+using OpenTK.Graphics.OpenGL
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using UMLProgram.Core.Render.Cube.Programs;
+
+namespace UMLProgram.Core.Render.Cube {
+    public static class CubeRenderer {
+        private static Matrix4 projectionMatrix, modelviewMatrix;
+        private static int vertexShaderHandle,
+            fragmentShaderHandle,
+            shaderProgramHandle,
+            modelviewMatrixLocation,
+            projectionMatrixLocation,
+            vaoHandle,
+            positionVboHandle,
+            normalVboHandle,
+            eboHandle;
+
+
+        public static void Load() {
+            CreateShaders();
+            CreateVBOs();
+            CreateVAOs();
+        }
+
+        public static void CreateShaders() {
+            vertexShaderHandle = GL.CreateShader(ShaderType.VertexShader);
+            fragmentShaderHandle = GL.CreateShader(ShaderType.FragmentShader);
+
+            GL.ShaderSource(vertexShaderHandle, VertexShader.Text);
+            GL.ShaderSource(fragmentShaderHandle, FragmentShader.Text);
+
+            GL.CompileShader(vertexShaderHandle);
+            GL.CompileShader(fragmentShaderHandle);
+
+            Trace.WriteLine(GL.GetShaderInfoLog(vertexShaderHandle));
+            Trace.WriteLine(GL.GetShaderInfoLog(fragmentShaderHandle));
+
+            // Create program
+            shaderProgramHandle = GL.CreateProgram();
+
+            GL.AttachShader(shaderProgramHandle, vertexShaderHandle);
+            GL.AttachShader(shaderProgramHandle, fragmentShaderHandle);
+
+            GL.LinkProgram(shaderProgramHandle);
+
+            Trace.WriteLine(GL.GetProgramInfoLog(shaderProgramHandle));
+
+            GL.UseProgram(shaderProgramHandle);
+
+            // Set uniforms
+            projectionMatrixLocation = GL.GetUniformLocation(shaderProgramHandle, "projection_matrix");
+            modelviewMatrixLocation = GL.GetUniformLocation(shaderProgramHandle, "modelview_matrix");
+
+            float aspectRatio = ClientSize.Width / (float)(ClientSize.Height);
+            Matrix4.CreatePerspectiveFieldOfView((float)Math.PI / 4, aspectRatio, 1, 100, out projectionMatrix);
+            modelviewMatrix = Matrix4.LookAt(new Vector3(0, 3, 5), new Vector3(0, 0, 0), new Vector3(0, 1, 0));
+
+            GL.UniformMatrix4(projectionMatrixLocation, false, ref projectionMatrix);
+            GL.UniformMatrix4(modelviewMatrixLocation, false, ref modelviewMatrix);
+        }
+    }
+}
