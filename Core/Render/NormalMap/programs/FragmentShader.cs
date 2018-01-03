@@ -36,8 +36,8 @@ namespace UMLProgram.Core.Render.NormalMap.programs {
                 vec3 diffuseColor = materialColor * light_color * light_power * cosTheta / (distance * distance);
                 vec3 ambientColor = materialColor * vec3(0.1, 0.1, 0.1);
                 vec3 specularColor = texture( mySpecularMap, UV).rgb * light_color * light_power * pow(cosAlpha,5) / (distance * distance);
-                color = diffuseColor+ambientColor+specularColor;
+                color =  diffuseColor + ambientColor + specularColor;
             }
         ";
-    }//+ambientColor+specularColor
+    }
 }

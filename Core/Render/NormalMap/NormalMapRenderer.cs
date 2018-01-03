@@ -37,7 +37,16 @@ namespace UMLProgram.Core.Render.NormalMap {
             specularMapHandle;
 
         public static void Activate() {
-            throw new NotImplementedException("NormalMapRenderer.Activate()");
+            GL.UseProgram(shaderProgramHandle);
+            GL.ActiveTexture(TextureUnit.Texture0);
+            GL.BindTexture(TextureTarget.Texture2D, textureHandle);
+            GL.Uniform1(textureHandle, 0);
+            GL.ActiveTexture(TextureUnit.Texture1);
+            GL.BindTexture(TextureTarget.Texture2D, normalMapHandle);
+            GL.Uniform1(normalMapHandle, 1);
+            GL.ActiveTexture(TextureUnit.Texture2);
+            GL.BindTexture(TextureTarget.Texture2D, specularMapHandle);
+            GL.Uniform1(specularMapHandle, 2);
         }
         public static void Load(Size clientSize) {
             LoadTexture();
@@ -54,9 +63,9 @@ namespace UMLProgram.Core.Render.NormalMap {
             String file = "C:\\Work\\My CSharp\\UMLProgram\\diffuse.dds";
             String normalMap = "C:\\Work\\My CSharp\\UMLProgram\\normal.bmp";
             String specularMap = "C:\\Work\\My CSharp\\UMLProgram\\specular.dds";
-            int textureHandle = DDSLoader.Load(file);
-            int normalMapHandle = BMPLoader.Load(normalMap);
-            int specularMapHandle = DDSLoader.Load(specularMap);
+            textureHandle = DDSLoader.Load(file);
+            normalMapHandle = BMPLoader.Load(normalMap);
+            specularMapHandle = DDSLoader.Load(specularMap);
             GL.ActiveTexture(TextureUnit.Texture0);
             GL.BindTexture(TextureTarget.Texture2D, textureHandle);
             GL.Uniform1(textureHandle, 0);
@@ -107,6 +116,7 @@ namespace UMLProgram.Core.Render.NormalMap {
             GL.UniformMatrix4(viewMatrixLocation, false, ref viewMatrix);
         }
         public static void Draw() {
+            Activate();
             GL.EnableVertexAttribArray(0);
             GL.BindBuffer(BufferTarget.ArrayBuffer, modelBuffer[modelKey].Item2.vertex);
             GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, Vector3.SizeInBytes, 0);
@@ -128,6 +138,25 @@ namespace UMLProgram.Core.Render.NormalMap {
             GL.DisableVertexAttribArray(2);
             GL.DisableVertexAttribArray(1);
             GL.DisableVertexAttribArray(0);
+
+        }
+        private static void DrawDebugNormals() {
+            GL.UseProgram(0);
+            GL.MatrixMode(MatrixMode.Projection);
+            GL.LoadMatrix(ref projectionMatrix);
+            GL.MatrixMode(MatrixMode.Modelview);
+            Matrix4 MV = viewMatrix * modelMatrix;
+            GL.LoadMatrix(ref MV);
+            GL.Begin(PrimitiveType.Lines);
+            for (int i = 0; i < modelBuffer[modelKey].Item1.Indices.Length; i++) {
+                int index = modelBuffer[modelKey].Item1.Indices[i];
+                Vector3 p = modelBuffer[modelKey].Item1.Vertices[index];
+                GL.Vertex3(p);
+                Vector3 o = Vector3.Normalize(modelBuffer[modelKey].Item1.Normals[index]);
+                p += o * 0.1f;
+                GL.Vertex3(p);
+            }
+            GL.End();
         }
         public static void Clear() {
             GL.DeleteBuffers(3, new int[] { modelBuffer[modelKey].Item2.vertex, modelBuffer[modelKey].Item2.uv, modelBuffer[modelKey].Item2.normal });
