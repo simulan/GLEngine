@@ -12,6 +12,10 @@ using System.Drawing;
 using UMLProgram.Core.Render.NormalMap.programs;
 using static UMLProgram.Core.Input.Controller;
 
+/*
+ * Note that used texture & normalmap or bmp/dds
+ * tga would have yielded greater quality
+ */
 namespace UMLProgram.Core.Render.NormalMap {
     public class NormalMapRenderer {
         private static ModelBuffer2 modelBuffer = new ModelBuffer2();
@@ -29,7 +33,8 @@ namespace UMLProgram.Core.Render.NormalMap {
             viewMatrixLocation,
             lightColorUniformLocation,
             lightPowerUniformLocation,
-            lightPositionUniformLocation;
+            lightPositionUniformLocation,
+            specularMapHandle;
 
         public static void Activate() {
             throw new NotImplementedException("NormalMapRenderer.Activate()");
@@ -48,15 +53,19 @@ namespace UMLProgram.Core.Render.NormalMap {
         private static void LoadTexture() {
             String file = "C:\\Work\\My CSharp\\UMLProgram\\diffuse.dds";
             String normalMap = "C:\\Work\\My CSharp\\UMLProgram\\normal.bmp";
-            textureHandle = DDSLoader.Load(file);
-            normalMapHandle = BMPLoader.Load(normalMap);
+            String specularMap = "C:\\Work\\My CSharp\\UMLProgram\\specular.dds";
+            int textureHandle = DDSLoader.Load(file);
+            int normalMapHandle = BMPLoader.Load(normalMap);
+            int specularMapHandle = DDSLoader.Load(specularMap);
             GL.ActiveTexture(TextureUnit.Texture0);
             GL.BindTexture(TextureTarget.Texture2D, textureHandle);
             GL.Uniform1(textureHandle, 0);
             GL.ActiveTexture(TextureUnit.Texture1);
             GL.BindTexture(TextureTarget.Texture2D, normalMapHandle);
             GL.Uniform1(normalMapHandle, 1);
-
+            GL.ActiveTexture(TextureUnit.Texture2);
+            GL.BindTexture(TextureTarget.Texture2D, specularMapHandle);
+            GL.Uniform1(specularMapHandle, 2);
         }
         private static IndexedD3Model2 LoadObj() {
             String file = "C:\\Work\\My CSharp\\UMLProgram\\cylinder.obj";
