@@ -1,0 +1,57 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using OpenTK.Graphics.OpenGL;
+using OpenTK;
+
+namespace UMLProgram.Core.Render.Common {
+    public class RenderContext {
+        private int id;
+        private int textureIndex;
+        private List<int> u1Handles = new List<int>();
+        private List<int> u3Handles = new List<int>();
+        private List<int> u4Handles = new List<int>();
+        private const int TEXTURE_UNIT_OFFSET = 33984;
+        private int textureUnitOffset=0;
+
+        public RenderContext(string vertexShader,string fragmentShader) {
+            id = ShaderProgram.Create(vertexShader, fragmentShader);
+        }
+        public int GetProgramHandle() { return id; }
+
+        private int SetUniform1(float value,string shaderVariableName) {
+            int uniformLocation = GL.GetUniformLocation(id, shaderVariableName);
+            GL.Uniform1(uniformLocation, value);
+            return uniformLocation;
+        }
+        public void AddUniform1(float value, string shaderVariableName) {
+            u1Handles.Add(SetUniform1(value,shaderVariableName));
+        }
+        private int SetUniform3(Vector3 value, string shaderVariableName) {
+            int uniformLocation = GL.GetUniformLocation(id, shaderVariableName);
+            GL.Uniform3(uniformLocation,ref value);
+            return uniformLocation;
+        }
+        public void AddUniform3(Vector3 value, string shaderVariableName) {
+            u3Handles.Add(SetUniform3(value, shaderVariableName));
+        }
+        private int SetUniform4(Matrix4 value, string shaderVariableName) {
+            int uniformLocation = GL.GetUniformLocation(id, shaderVariableName);
+            GL.UniformMatrix4(uniformLocation,false,ref value);
+            return uniformLocation;
+        }
+        public void AddUniform4(Matrix4 value, string shaderVariableName) {
+            u4Handles.Add(SetUniform4(value, shaderVariableName));
+        }
+        public void AddTexture(int textureHandle) {
+            GL.ActiveTexture((TextureUnit) TEXTURE_UNIT_OFFSET + textureUnitOffset);
+            GL.BindTexture(TextureTarget.Texture2D, textureHandle);
+            GL.Uniform1(textureHandle, textureUnitOffset);
+            textureUnitOffset++;
+        }
+
+
+    }
+}

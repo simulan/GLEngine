@@ -16,7 +16,7 @@ using UMLProgram.Core.Render.SimpleObject.Programs;
 
 namespace UMLProgram.Core.Render.SimpleObject {
     public class SimpleObjectRenderer {
-        private static ModelBuffer modelBuffer = new ModelBuffer();
+        private static BufferService bufferService = new BufferService();
         private static Matrix4 projectionMatrix, viewMatrix, modelMatrix;
         private static Vector3 lightColorUniform = new Vector3(0.8f, 0.8f, 0.8f);
         private static Vector3 lightPositionUniform = new Vector3(5, 5, 0);
@@ -40,7 +40,7 @@ namespace UMLProgram.Core.Render.SimpleObject {
         public static void Load(Size clientSize) {
             LoadTextures();
             CreateVertexArray();
-            modelKey = modelBuffer.Add(LoadObj());
+            modelKey = bufferService.Buffer(LoadObj());
             shaderProgramHandle = ShaderProgram.Create(VertexShader.Text, FragmentShader.Text);
             BindShaderData(clientSize);
         }
@@ -90,22 +90,13 @@ namespace UMLProgram.Core.Render.SimpleObject {
             GL.UniformMatrix4(viewMatrixLocation, false, ref viewMatrix);
         }
         public static void Draw() {
-            GL.EnableVertexAttribArray(0);
-            GL.BindBuffer(BufferTarget.ArrayBuffer, modelBuffer[modelKey].Item2.vertex);
-            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, Vector3.SizeInBytes, 0);
-            GL.EnableVertexAttribArray(1);
-            GL.BindBuffer(BufferTarget.ArrayBuffer, modelBuffer[modelKey].Item2.uv);
-            GL.VertexAttribPointer(1, 2, VertexAttribPointerType.Float, false, Vector2.SizeInBytes, 0);
-            GL.EnableVertexAttribArray(2);
-            GL.BindBuffer(BufferTarget.ArrayBuffer, modelBuffer[modelKey].Item2.normal);
-            GL.VertexAttribPointer(2, 3,  VertexAttribPointerType.Float, false, Vector3.SizeInBytes, 0);
-            GL.DrawElements(PrimitiveType.Triangles, modelBuffer[modelKey].Item1.Indices.Length, DrawElementsType.UnsignedInt, modelBuffer[modelKey].Item1.Indices);
-            GL.DisableVertexAttribArray(2);
-            GL.DisableVertexAttribArray(1);
-            GL.DisableVertexAttribArray(0);
+            int[] indices = bufferService.GetModel<IndexedD3Model>(modelKey).Indices;
+            int offset = bufferService.EnableAttributes<IndexedD3Model>(modelKey, 0);
+            GL.DrawElements(PrimitiveType.Triangles, indices.Length, DrawElementsType.UnsignedInt, indices);
+            offset = bufferService.DisableAttributes<IndexedD3Model>(offset) ;
         }
         public static void Clear() {
-            GL.DeleteBuffers(3, new int[] { modelBuffer[modelKey].Item2.vertex, modelBuffer[modelKey].Item2.uv, modelBuffer[modelKey].Item2.normal});
+            bufferService.DisposeBuffers();
             GL.DeleteTexture(textureHandle);
             GL.DeleteProgram(shaderProgramHandle);
             GL.DeleteVertexArray(vertexArrayHandle);
