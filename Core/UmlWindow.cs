@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UMLProgram.Core.Input;
+using UMLProgram.Core.Loaders;
 using UMLProgram.Core.Render.ColorCube;
 using UMLProgram.Core.Render.Cube;
 using UMLProgram.Core.Render.NormalMap;
@@ -30,6 +31,8 @@ namespace UMLProgram.Core {
             controller = new Controller(Keyboard.NumberOfKeys);
         }
         protected override void OnLoad(EventArgs e) {
+            string file = "C:\\Work\\My CSharp\\UMLProgram\\lightmap.tga";
+            TGALoader.Load(file);
             CalculateInnerWindow();
             VSync = VSyncMode.On;
             GL.Enable(EnableCap.DepthTest);

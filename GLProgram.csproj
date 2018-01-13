@@ -58,7 +58,9 @@
     <Compile Include="Core\Loaders\Files\DDS.cs" />
     <Compile Include="Core\Loaders\DDSLoader.cs" />
     <Compile Include="Core\Loaders\Files\IndexedD3Model2.cs" />
+    <Compile Include="Core\Loaders\Files\TGA.cs" />
     <Compile Include="Core\Loaders\Files\TriIndexedD3Model.cs" />
+    <Compile Include="Core\Loaders\TGALoader.cs" />
     <Compile Include="Core\Render\ColorCube\ColorCubeRenderer.cs" />
     <Compile Include="Core\Render\ColorCube\CubeVertexData.cs" />
     <Compile Include="Core\Render\ColorCube\Programs\FragmentShader.cs" />
