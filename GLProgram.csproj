@@ -61,6 +61,8 @@
     <Compile Include="Core\Loaders\Files\TGA.cs" />
     <Compile Include="Core\Loaders\Files\TriIndexedD3Model.cs" />
     <Compile Include="Core\Loaders\TGALoader.cs" />
+    <Compile Include="Core\Render\Base\BaseRenderer.cs" />
+    <Compile Include="Core\Render\Base\InputRenderer.cs" />
     <Compile Include="Core\Render\ColorCube\ColorCubeRenderer.cs" />
     <Compile Include="Core\Render\ColorCube\CubeVertexData.cs" />
     <Compile Include="Core\Render\ColorCube\Programs\FragmentShader.cs" />
@@ -76,8 +78,12 @@
     <Compile Include="Core\Render\Common\ShaderProgram.cs" />
     <Compile Include="Core\Render\Cube\CubeRenderer.cs" />
     <Compile Include="Core\Render\Cube\CubeVertexData.cs" />
-    <Compile Include="Core\Render\FragmentShader.cs" />
+    <Compile Include="Core\Render\Cube\Programs\FragmentShader.cs" />
     <Compile Include="Core\Render\Cube\Programs\VertexShader.cs" />
+    <Compile Include="Core\Render\LightMap\LightMapRenderer.cs" />
+    <Compile Include="Core\Render\LightMap\LightMapRendererHeader.cs" />
+    <Compile Include="Core\Render\LightMap\programs\FragmentShader.cs" />
+    <Compile Include="Core\Render\LightMap\programs\VertexShader.cs" />
     <Compile Include="Core\Render\NormalMap\NormalMapRenderer.cs" />
     <Compile Include="Core\Render\NormalMap\programs\FragmentShader.cs" />
     <Compile Include="Core\Render\NormalMap\programs\VertexShader.cs" />
@@ -86,7 +92,6 @@
     <Compile Include="Core\Render\Rectangle\Programs\VertexShader.cs" />
     <Compile Include="Core\Render\Rectangle\RectangleRenderer.cs" />
     <Compile Include="Core\Render\Rectangle\RectangleVertexData.cs" />
-    <Compile Include="Core\Render\Renderer.cs" />
     <Compile Include="Core\Render\RenderToTexture\Programs\FragmentShader.cs" />
     <Compile Include="Core\Render\RenderToTexture\Programs\RTTFragmentShader.cs" />
     <Compile Include="Core\Render\RenderToTexture\Programs\RTTVertexShader.cs" />
@@ -94,6 +99,13 @@
     <Compile Include="Core\Render\RenderToTexture\QuadVertexBufferData.cs" />
     <Compile Include="Core\Render\RenderToTexture\RTTRenderer.cs" />
     <Compile Include="Core\Render\RenderToTexture\RTTRendererHeader.cs" />
+    <Compile Include="Core\Render\ShadowMap\Programs\BufferFragmentShader.cs" />
+    <Compile Include="Core\Render\ShadowMap\Programs\BufferVertexShader.cs" />
+    <Compile Include="Core\Render\ShadowMap\Programs\FragmentShader.cs" />
+    <Compile Include="Core\Render\ShadowMap\Programs\VertexShader.cs" />
+    <Compile Include="Core\Render\ShadowMap\QuadVertexBufferData.cs" />
+    <Compile Include="Core\Render\ShadowMap\ShadowMapRenderer.cs" />
+    <Compile Include="Core\Render\ShadowMap\ShadowMapRendererHeader.cs" />
     <Compile Include="Core\Render\SimpleObject\Programs\FragmentShader.cs" />
     <Compile Include="Core\Render\SimpleObject\Programs\VertexShader.cs" />
     <Compile Include="Core\Render\SimpleObject\SimpleObjectRenderer.cs" />

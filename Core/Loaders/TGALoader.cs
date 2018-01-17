@@ -26,6 +26,7 @@ namespace UMLProgram.Core.Loaders {
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMagFilter.Linear);
             GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, image.Header.Width, image.Header.Height, 0, PixelFormat.Rgba, PixelType.UnsignedByte, image.Buffer);
+            GL.GenerateMipmap(GenerateMipmapTarget.Texture2D);
             return textureHandle;
         }
         public static TGA.Data GetHeaderFromBytes(FileStream stream) {

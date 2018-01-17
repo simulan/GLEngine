@@ -83,7 +83,7 @@ namespace UMLProgram.Core.Render.RenderToTexture {
         private static void SetDepthBuffer() {
             depthRenderBuffer = GL.GenRenderbuffer();
             GL.BindRenderbuffer(RenderbufferTarget.Renderbuffer, depthRenderBuffer);
-            GL.RenderbufferStorage(RenderbufferTarget.Renderbuffer, RenderbufferStorage.DepthComponent, 1024, 768);
+            GL.RenderbufferStorage(RenderbufferTarget.Renderbuffer, RenderbufferStorage.DepthComponent, 1024, 768); //change to .ColorAttach if showing 2nd scene
             GL.FramebufferRenderbuffer(FramebufferTarget.Framebuffer, FramebufferAttachment.Depth, RenderbufferTarget.Renderbuffer, depthRenderBuffer);
         }
         private static void BindShaderData(Size clientSize) {

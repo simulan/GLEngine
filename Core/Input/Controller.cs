@@ -17,13 +17,17 @@ namespace UMLProgram.Core.Input {
             pressed = new bool[totalKeys];
             Data = new ControllerData();
         }
-
+        public Controller(int totalKeys,Vector3 position) {
+            pressed = new bool[totalKeys];
+            Data = new ControllerData();
+            Data.Position = position;
+        }
         //TODO: should be independant of controller (Demeter)
         // As this data is significant for Renderer's but the controller is not.
         public class ControllerData {
             public Vector3 Direction,Right;
             public int FOV=45;
-            public Vector3 Position = new Vector3(0, 0, 5);
+            public Vector3 Position = new Vector3(0, 0, 0);
         }
 
         public void CalculateChanges(double deltaTime, Point mouse, int wheel, KeyboardState keys) {
